@@ -11,7 +11,7 @@ Mongodb
 
 ### `FrontEnd`
 React\
-ApolloClient\
+ApolloClient
 
 ## Available Scripts
 
