@@ -35,28 +35,9 @@ function RoomDetails(props) {
 
   const [updateRoom] = useMutation(UPDATE_ROOM);
 
-  console.log("userData:", user?.checkIn);
-
-  // const userCheckInCheckOut = {
-  //   checkIn: user.checkIn,
-  //   checkOut: user.checkOut,
-  // };
-
   // Book now i.e put request
   const handleBookNow = () => {
     // Room update request
-    // axios
-    //   .put(
-    //     `http://localhost:5000/rooms/updateRoom/${getRoomId}`,
-    //     userCheckInCheckOut
-    //   )
-    //   .then((response) => {
-    //     console.log("Put Response:", response);
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error:", error);
-    //   });
-
     updateRoom({
       variables: {
         id: getRoomId,
