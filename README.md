@@ -15,7 +15,7 @@ ApolloClient
 
 ## Available Scripts
 
-In the Client folder directory after installing all the dependencies, you can run:
+**In the Client folder directory after installing all the dependencies, you can run:**
 
 ### `npm start`
 
@@ -25,7 +25,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-**After installing all the dependencies in Backend run**
+**After installing all the dependencies in Backend i.e Server folder run**
 
 ### `nodemon server.js`
 
