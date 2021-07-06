@@ -5,13 +5,13 @@ This is basically a simple Room Booking website where the user can book his room
 This project was bootstrapped with.
 
 ### `Backend`
-Node-Express
-GraphQL
+Node-Express\
+GraphQL\
 Mongodb
 
 ### `FrontEnd`
-React
-ApolloClient
+React\
+ApolloClient\
 
 ## Available Scripts
 
@@ -29,6 +29,6 @@ You will also see any lint errors in the console.
 
 ### `nodemon server.js`
 
-Runs the app on the 8000 port
+Runs the app on the 8000 port.\
 Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
