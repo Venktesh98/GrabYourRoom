@@ -10,13 +10,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Navbar from "./components/Navbar/Navbar";
 import DataPersistContext from "./Context/StateContext";
 import { useEffect, useState } from "react";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-
-// apollo client setup
-const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql",
-  cache: new InMemoryCache(),
-});
+import { useQuery } from "@apollo/client";
+import { GET_USER } from "./queries/queries";
 
 const initialValues = {
   firstName: "",
@@ -27,35 +22,41 @@ const initialValues = {
 };
 
 function App() {
+  let userId = JSON.parse(localStorage.getItem("userId"));
+
   const [usersData, setUsersData] = useState(initialValues);
   const [email, setEmail] = useState("");
+  const { data } = useQuery(GET_USER, {
+    variables: { id: userId },
+  });
+
+  // For persisting the username on the receipt after global refresh
+  useEffect(() => {
+    if (data) {
+      console.log("RESPONSE USER IN APP JS", data);
+      setUsersData(data.user);
+      setEmail(data.user.email);
+    }
+  }, [data]);
 
   return (
     <div>
-      {/* <Navbar /> */}
-
-      {/* Context Api implementation with Apollo Provider */}
-      <ApolloProvider client={client}>
-        <DataPersistContext.Provider
-          value={{
-            usersDataValue: [usersData, setUsersData],
-            usersEmail: [email, setEmail],
-          }}
-        >
-          <Switch>
-            <Route path="/" component={Home} exact />
-            <Route path="/search-room" component={SearchRoom} exact />
-            <Route path="/rooms-listing" component={AllRooms} exact />
-            <Route path="/about" component={About} exact />
-            <Route
-              path="/room-details/:id"
-              component={RoomDetails}
-              exact
-            ></Route>
-            <Route path="/room-receipt" component={RoomReceipt} exact></Route>
-          </Switch>
-        </DataPersistContext.Provider>
-      </ApolloProvider>
+      {/* Context Api implementation */}
+      <DataPersistContext.Provider
+        value={{
+          usersDataValue: [usersData, setUsersData],
+          usersEmail: [email, setEmail],
+        }}
+      >
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/search-room" component={SearchRoom} exact />
+          <Route path="/rooms-listing" component={AllRooms} exact />
+          <Route path="/about" component={About} exact />
+          <Route path="/room-details/:id" component={RoomDetails} exact></Route>
+          <Route path="/room-receipt" component={RoomReceipt} exact></Route>
+        </Switch>
+      </DataPersistContext.Provider>
     </div>
   );
 }
